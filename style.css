@@ -11,7 +11,6 @@
   --gold: #ffb65c;
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.46);
   --radius: 20px;
-  --radius-sm: 14px;
   --container: 1180px;
 }
 
@@ -60,7 +59,7 @@ button {
   inset: 0;
   pointer-events: none;
   opacity: 0.06;
-  background-image: radial-gradient(rgba(255,255,255,0.45) 0.45px, transparent 0.45px);
+  background-image: radial-gradient(rgba(255,255,255,0.42) 0.45px, transparent 0.45px);
   background-size: 6px 6px;
   mix-blend-mode: soft-light;
   z-index: 0;
@@ -71,40 +70,57 @@ button {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.52) 100%);
+  background: radial-gradient(circle at center, transparent 32%, rgba(0,0,0,0.58) 100%);
+}
+
+.bg-pulse {
+  position: fixed;
+  inset: -20%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255, 60, 60, 0.08), transparent 24%),
+    radial-gradient(circle at 80% 20%, rgba(255, 180, 100, 0.05), transparent 20%),
+    radial-gradient(circle at 50% 80%, rgba(255, 60, 60, 0.06), transparent 22%);
+  animation: pulseField 10s ease-in-out infinite;
 }
 
 .fog {
   position: fixed;
-  inset: auto auto 0 0;
-  width: 120vw;
-  height: 260px;
+  width: 130vw;
+  height: 280px;
   pointer-events: none;
   z-index: 0;
-  filter: blur(30px);
+  filter: blur(40px);
   opacity: 0.12;
 }
 
 .fog-1 {
-  bottom: -40px;
-  left: -10vw;
-  background: radial-gradient(circle, rgba(255, 60, 60, 0.26) 0%, transparent 60%);
+  bottom: -50px;
+  left: -20vw;
+  background: radial-gradient(circle, rgba(255, 60, 60, 0.24) 0%, transparent 60%);
   animation: fogMove 16s linear infinite;
 }
 
 .fog-2 {
-  bottom: 120px;
+  bottom: 110px;
   right: -20vw;
-  left: auto;
-  background: radial-gradient(circle, rgba(255, 190, 100, 0.14) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(255, 190, 100, 0.12) 0%, transparent 60%);
   animation: fogMoveReverse 20s linear infinite;
+}
+
+.fog-3 {
+  top: 120px;
+  left: 10vw;
+  background: radial-gradient(circle, rgba(255, 60, 60, 0.08) 0%, transparent 60%);
+  animation: floatSlow 18s ease-in-out infinite;
 }
 
 .strings {
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 170px;
+  width: 200px;
   pointer-events: none;
   z-index: 0;
   opacity: 0.34;
@@ -113,30 +129,62 @@ button {
 .strings-left { left: 0; }
 .strings-right { right: 0; }
 
-.strings span {
+.strings span,
+.chart-strings span {
   position: absolute;
   top: -20px;
   width: 1px;
   height: 120vh;
   background: linear-gradient(
     180deg,
-    rgba(255, 180, 100, 0.03) 0%,
-    rgba(255, 100, 100, 0.76) 38%,
-    rgba(255, 180, 100, 0.03) 100%
+    rgba(255, 180, 100, 0.02) 0%,
+    rgba(255, 100, 100, 0.78) 40%,
+    rgba(255, 180, 100, 0.02) 100%
   );
-  box-shadow: 0 0 10px rgba(255, 90, 90, 0.15);
-  animation: sway 8s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(255, 90, 90, 0.16);
+  animation: puppetPull 7.5s ease-in-out infinite;
 }
 
-.strings-left span:nth-child(1) { left: 24px; animation-delay: 0s; }
-.strings-left span:nth-child(2) { left: 58px; animation-delay: 1.2s; }
-.strings-left span:nth-child(3) { left: 92px; animation-delay: 2.3s; }
-.strings-left span:nth-child(4) { left: 126px; animation-delay: 3.3s; }
+.strings-left span:nth-child(1) { left: 20px; animation-delay: 0s; }
+.strings-left span:nth-child(2) { left: 52px; animation-delay: 1s; }
+.strings-left span:nth-child(3) { left: 84px; animation-delay: 2s; }
+.strings-left span:nth-child(4) { left: 116px; animation-delay: 3s; }
+.strings-left span:nth-child(5) { left: 148px; animation-delay: 4s; }
 
-.strings-right span:nth-child(1) { right: 24px; animation-delay: 0.7s; }
-.strings-right span:nth-child(2) { right: 58px; animation-delay: 1.9s; }
-.strings-right span:nth-child(3) { right: 92px; animation-delay: 2.8s; }
-.strings-right span:nth-child(4) { right: 126px; animation-delay: 3.8s; }
+.strings-right span:nth-child(1) { right: 20px; animation-delay: 0.4s; }
+.strings-right span:nth-child(2) { right: 52px; animation-delay: 1.4s; }
+.strings-right span:nth-child(3) { right: 84px; animation-delay: 2.4s; }
+.strings-right span:nth-child(4) { right: 116px; animation-delay: 3.4s; }
+.strings-right span:nth-child(5) { right: 148px; animation-delay: 4.4s; }
+
+.puppet-shadow {
+  position: fixed;
+  top: 0;
+  width: 240px;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.05;
+  filter: blur(8px);
+}
+
+.puppet-shadow-left {
+  left: -40px;
+  background:
+    radial-gradient(circle at 70% 15%, rgba(255,255,255,0.12), transparent 8%),
+    linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.1) 8%, transparent 20%),
+    linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.08) 12%, transparent 24%);
+  animation: shadowSwingLeft 12s ease-in-out infinite;
+}
+
+.puppet-shadow-right {
+  right: -40px;
+  background:
+    radial-gradient(circle at 30% 15%, rgba(255,255,255,0.12), transparent 8%),
+    linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.1) 8%, transparent 20%),
+    linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.08) 12%, transparent 24%);
+  animation: shadowSwingRight 11s ease-in-out infinite;
+}
 
 .site-header,
 .hero,
@@ -169,11 +217,8 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 14px;
-  transition: transform 0.25s ease;
-}
-
-.brand:hover {
-  transform: translateY(-1px);
+  transition: transform 0.22s ease;
+  will-change: transform;
 }
 
 .brand-logo {
@@ -185,14 +230,15 @@ button {
   box-shadow:
     0 0 0 4px rgba(255, 80, 80, 0.04),
     0 0 24px rgba(255, 80, 80, 0.14);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
 }
 
 .brand:hover .brand-logo {
-  transform: scale(1.05) rotate(-2deg);
+  transform: scale(1.06) rotate(-3deg);
+  filter: brightness(1.04);
   box-shadow:
     0 0 0 4px rgba(255, 80, 80, 0.06),
-    0 0 30px rgba(255, 80, 80, 0.22);
+    0 0 32px rgba(255, 80, 80, 0.24);
 }
 
 .brand-text {
@@ -202,14 +248,15 @@ button {
 }
 
 .brand-text strong {
-  font-family: "Cinzel", serif;
-  font-size: 1.05rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  font-family: "UnifrakturCook", serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.03em;
+  font-weight: 700;
 }
 
 .brand-text span {
-  font-size: 0.82rem;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1rem;
   color: var(--red-soft);
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -229,8 +276,8 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  min-height: 48px;
-  padding: 10px 16px;
+  min-height: 50px;
+  padding: 10px 18px;
   border: 1px solid rgba(255, 88, 88, 0.24);
   background: linear-gradient(180deg, rgba(24, 12, 12, 0.9), rgba(11, 7, 7, 0.9));
   border-radius: 999px;
@@ -242,9 +289,12 @@ button {
     border-color 0.28s ease,
     box-shadow 0.28s ease,
     background 0.28s ease;
+  will-change: transform;
 }
 
-.social-btn::before {
+.social-btn::before,
+.copy-btn::before,
+.interactive-panel::before {
   content: "";
   position: absolute;
   inset: -40%;
@@ -255,10 +305,12 @@ button {
     transparent 70%
   );
   transform: translateX(-130%) rotate(8deg);
-  transition: transform 0.7s ease;
+  transition: transform 0.8s ease;
 }
 
-.social-btn:hover::before {
+.social-btn:hover::before,
+.copy-btn:hover::before,
+.interactive-panel:hover::before {
   transform: translateX(130%) rotate(8deg);
 }
 
@@ -267,11 +319,15 @@ button {
   border-color: rgba(255, 110, 110, 0.48);
   box-shadow:
     0 0 22px rgba(224, 25, 25, 0.16),
-    0 6px 20px rgba(0,0,0,0.22);
+    0 10px 24px rgba(0,0,0,0.26);
 }
 
 .social-btn:active {
-  transform: translateY(0) scale(0.99);
+  transform: translateY(0) scale(0.98);
+}
+
+.social-btn:hover .btn-strings {
+  opacity: 1;
 }
 
 .social-icon {
@@ -293,7 +349,8 @@ button {
 }
 
 .social-copy {
-  font-size: 0.93rem;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.15rem;
   color: var(--muted);
   white-space: nowrap;
   transition: color 0.28s ease, letter-spacing 0.28s ease;
@@ -304,8 +361,43 @@ button {
   letter-spacing: 0.02em;
 }
 
+.btn-strings {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-strings::before,
+.btn-strings::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,90,90,0.5), transparent);
+  animation: miniPull 1.2s ease-in-out infinite;
+}
+
+.btn-strings::before { left: 28%; }
+.btn-strings::after { right: 28%; animation-delay: 0.2s; }
+
 .hero {
   padding: 28px 0 12px;
+}
+
+.hero-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-wrap:hover {
+  box-shadow:
+    0 32px 85px rgba(0,0,0,0.48),
+    0 0 60px rgba(224, 25, 25, 0.14);
 }
 
 .hero-banner {
@@ -316,6 +408,42 @@ button {
     0 30px 80px rgba(0,0,0,0.42),
     0 0 40px rgba(224, 25, 25, 0.08);
   animation: bannerPulse 5.4s ease-in-out infinite;
+  transition: transform 0.45s ease, filter 0.45s ease;
+}
+
+.hero-wrap:hover .hero-banner {
+  transform: scale(1.015);
+  filter: brightness(1.03);
+}
+
+.hero-curtain {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 70px;
+  pointer-events: none;
+  opacity: 0.28;
+  transition: transform 0.45s ease, opacity 0.45s ease;
+}
+
+.hero-curtain.left {
+  left: 0;
+  background: linear-gradient(90deg, rgba(120,0,0,0.35), transparent);
+}
+
+.hero-curtain.right {
+  right: 0;
+  background: linear-gradient(270deg, rgba(120,0,0,0.35), transparent);
+}
+
+.hero-wrap:hover .hero-curtain.left {
+  transform: translateX(-8px);
+  opacity: 0.4;
+}
+
+.hero-wrap:hover .hero-curtain.right {
+  transform: translateX(8px);
+  opacity: 0.4;
 }
 
 .intro {
@@ -325,25 +453,41 @@ button {
 .intro-card,
 .contract-card,
 .chart-frame {
+  position: relative;
   background: linear-gradient(180deg, rgba(18, 11, 11, 0.82), rgba(11, 8, 8, 0.94));
   border: 1px solid rgba(255, 88, 88, 0.12);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  overflow: hidden;
+  transition:
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+  will-change: transform;
+}
+
+.intro-card:hover,
+.contract-card:hover,
+.chart-frame:hover {
+  border-color: rgba(255, 110, 110, 0.26);
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.52),
+    0 0 30px rgba(224, 25, 25, 0.1);
 }
 
 .intro-card {
   padding: 30px;
   text-align: center;
-  position: relative;
-  overflow: hidden;
 }
 
-.intro-card::after {
+.intro-card::after,
+.contract-card::after,
+.chart-frame::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.035), transparent 46%);
+  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.04), transparent 46%);
 }
 
 .eyebrow {
@@ -352,20 +496,20 @@ button {
   letter-spacing: 0.26em;
   font-size: 0.8rem;
   text-transform: uppercase;
+  font-family: "Cormorant Garamond", serif;
 }
 
 .intro h1,
-.section-head h2 {
-  font-family: "Cinzel", serif;
+.section-head h2,
+.chart-placeholder-content h3 {
+  font-family: "UnifrakturCook", serif;
 }
 
 .intro h1 {
   margin: 0;
-  font-size: clamp(2rem, 5vw, 4.1rem);
-  line-height: 0.96;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  text-shadow: 0 0 18px rgba(224, 25, 25, 0.1);
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
 }
 
 .lead {
@@ -374,6 +518,7 @@ button {
   color: var(--muted);
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-family: "Cormorant Garamond", serif;
 }
 
 .lead span {
@@ -402,19 +547,18 @@ button {
 .section-head h2 {
   margin: 0;
   font-size: clamp(1.5rem, 3vw, 2.45rem);
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.04em;
 }
 
 .section-head p {
   margin: 8px 0 0;
   color: var(--muted);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.15rem;
 }
 
 .chart-frame {
   padding: 16px;
-  position: relative;
-  overflow: hidden;
 }
 
 .chart-frame::before {
@@ -460,6 +604,17 @@ button {
   opacity: 0.25;
 }
 
+.chart-strings {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+.chart-strings span:nth-child(1) { left: 30%; animation-delay: 0s; }
+.chart-strings span:nth-child(2) { left: 50%; animation-delay: 1.2s; }
+.chart-strings span:nth-child(3) { left: 70%; animation-delay: 2.4s; }
+
 .chart-placeholder-content {
   position: relative;
   z-index: 1;
@@ -473,14 +628,13 @@ button {
   letter-spacing: 0.24em;
   font-size: 0.78rem;
   text-transform: uppercase;
+  font-family: "Cormorant Garamond", serif;
 }
 
 .chart-placeholder-content h3 {
   margin: 0;
-  font-family: "Cinzel", serif;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-size: clamp(1.6rem, 4vw, 2.65rem);
+  line-height: 1.2;
 }
 
 .placeholder-text {
@@ -488,6 +642,8 @@ button {
   margin: 12px auto 0;
   color: var(--muted);
   line-height: 1.7;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.15rem;
 }
 
 .contract-section {
@@ -505,6 +661,7 @@ button {
   letter-spacing: 0.22em;
   font-size: 0.8rem;
   color: var(--red-soft);
+  font-family: "Cormorant Garamond", serif;
 }
 
 .contract-box {
@@ -517,6 +674,12 @@ button {
   border: 1px solid rgba(255, 88, 88, 0.16);
   background: rgba(6, 5, 5, 0.88);
   overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contract-box:hover {
+  border-color: rgba(255, 110, 110, 0.28);
+  box-shadow: inset 0 0 30px rgba(255, 80, 80, 0.04);
 }
 
 .contract-box code {
@@ -542,28 +705,11 @@ button {
     box-shadow 0.22s ease,
     background 0.22s ease;
   flex-shrink: 0;
-}
-
-.copy-btn::before {
-  content: "";
-  position: absolute;
-  inset: -50%;
-  background: linear-gradient(
-    120deg,
-    transparent 25%,
-    rgba(255,255,255,0.08) 50%,
-    transparent 75%
-  );
-  transform: translateX(-130%);
-  transition: transform 0.7s ease;
-}
-
-.copy-btn:hover::before {
-  transform: translateX(130%);
+  will-change: transform;
 }
 
 .copy-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
   border-color: rgba(255, 110, 110, 0.48);
   box-shadow: 0 0 18px rgba(224, 25, 25, 0.14);
 }
@@ -577,6 +723,7 @@ button {
   margin: 12px 0 0;
   font-size: 0.92rem;
   color: var(--gold);
+  font-family: "Cormorant Garamond", serif;
 }
 
 .site-footer {
@@ -590,9 +737,9 @@ button {
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.74rem;
+  font-family: "Cormorant Garamond", serif;
 }
 
-/* Reveal */
 .reveal {
   opacity: 0;
   transform: translateY(22px);
@@ -604,19 +751,10 @@ button {
   transform: translateY(0);
 }
 
-.reveal-delay-1 { transition-delay: 0.08s; }
-.reveal-delay-2 { transition-delay: 0.16s; }
-.reveal-delay-3 { transition-delay: 0.24s; }
-.reveal-delay-4 { transition-delay: 0.32s; }
-
 /* Animations */
 @keyframes glowText {
-  from {
-    text-shadow: 0 0 6px rgba(255, 80, 80, 0.16);
-  }
-  to {
-    text-shadow: 0 0 18px rgba(255, 80, 80, 0.34);
-  }
+  from { text-shadow: 0 0 6px rgba(255, 80, 80, 0.16); }
+  to { text-shadow: 0 0 18px rgba(255, 80, 80, 0.34); }
 }
 
 @keyframes bannerPulse {
@@ -632,24 +770,9 @@ button {
   }
 }
 
-@keyframes sway {
-  0%, 100% {
-    transform: translateX(0) rotate(0.2deg);
-    opacity: 0.24;
-  }
-  50% {
-    transform: translateX(8px) rotate(-0.55deg);
-    opacity: 0.46;
-  }
-}
-
 @keyframes scan {
-  0% {
-    transform: translateX(-120%);
-  }
-  100% {
-    transform: translateX(120%);
-  }
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
 }
 
 @keyframes fogMove {
@@ -662,6 +785,50 @@ button {
   0% { transform: translateX(0); }
   50% { transform: translateX(-10vw); }
   100% { transform: translateX(0); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(4vw, 25px); }
+}
+
+@keyframes pulseField {
+  0%, 100% { transform: scale(1) translateY(0); opacity: 1; }
+  50% { transform: scale(1.05) translateY(-8px); opacity: 0.88; }
+}
+
+@keyframes puppetPull {
+  0%, 100% {
+    transform: translateX(0) translateY(0) rotate(0.2deg);
+    opacity: 0.2;
+  }
+  25% {
+    transform: translateX(4px) translateY(-6px) rotate(-0.4deg);
+    opacity: 0.38;
+  }
+  50% {
+    transform: translateX(8px) translateY(4px) rotate(-0.7deg);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateX(2px) translateY(-2px) rotate(0.3deg);
+    opacity: 0.34;
+  }
+}
+
+@keyframes miniPull {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(4px); opacity: 0.6; }
+}
+
+@keyframes shadowSwingLeft {
+  0%, 100% { transform: translateX(0) rotate(0deg); opacity: 0.03; }
+  50% { transform: translateX(10px) rotate(1deg); opacity: 0.06; }
+}
+
+@keyframes shadowSwingRight {
+  0%, 100% { transform: translateX(0) rotate(0deg); opacity: 0.03; }
+  50% { transform: translateX(-10px) rotate(-1deg); opacity: 0.06; }
 }
 
 /* Responsive */
@@ -695,8 +862,12 @@ button {
   }
 
   .strings {
-    width: 90px;
-    opacity: 0.2;
+    width: 95px;
+    opacity: 0.18;
+  }
+
+  .puppet-shadow {
+    display: none;
   }
 
   .brand-logo {
@@ -705,11 +876,11 @@ button {
   }
 
   .brand-text strong {
-    font-size: 0.92rem;
+    font-size: 1.05rem;
   }
 
   .brand-text span {
-    font-size: 0.74rem;
+    font-size: 0.84rem;
   }
 
   .socials {
@@ -725,14 +896,15 @@ button {
   }
 
   .social-copy {
-    font-size: 0.88rem;
+    font-size: 1rem;
   }
 
   .hero {
     padding-top: 16px;
   }
 
-  .hero-banner {
+  .hero-banner,
+  .hero-wrap {
     border-radius: 18px;
   }
 
@@ -777,7 +949,7 @@ button {
 
 @media (max-width: 420px) {
   .intro h1 {
-    letter-spacing: 0.01em;
+    font-size: 1.9rem;
   }
 
   .lead {
@@ -785,6 +957,6 @@ button {
   }
 
   .chart-placeholder-content h3 {
-    font-size: 1.55rem;
+    font-size: 1.4rem;
   }
 }
