@@ -1,11 +1,8 @@
 :root {
   --bg: #040404;
-  --bg-soft: #0d0909;
   --panel: rgba(16, 10, 10, 0.82);
-  --panel-strong: rgba(18, 10, 10, 0.94);
   --text: #f4efe8;
   --muted: #bca9a2;
-  --line: rgba(255, 85, 85, 0.16);
   --red: #e01919;
   --red-soft: #ff5252;
   --gold: #ffb65c;
@@ -33,6 +30,7 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   position: relative;
+  cursor: none;
 }
 
 img {
@@ -54,10 +52,73 @@ button {
   margin: 0 auto;
 }
 
+/* Loader */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: radial-gradient(circle at center, rgba(50, 0, 0, 0.18), #020202 60%);
+  display: grid;
+  place-items: center;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+.loader.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-inner {
+  text-align: center;
+  width: min(90%, 480px);
+}
+
+.loader-top {
+  margin: 0 0 12px;
+  color: var(--red-soft);
+  letter-spacing: 0.28em;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.loader h1 {
+  margin: 0 0 18px;
+  font-family: "Cinzel", serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  letter-spacing: 0.05em;
+}
+
+.loader-line {
+  height: 2px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+.loader-line span {
+  display: block;
+  width: 35%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--red-soft), transparent);
+  animation: loadingLine 1.5s linear infinite;
+}
+
+/* Background */
+.bg-noise,
+.bg-vignette,
+.bg-pulse,
+.fog,
+.strings,
+.watchers,
+.cursor-dot,
+.cursor-ring {
+  pointer-events: none;
+}
+
 .bg-noise {
   position: fixed;
   inset: 0;
-  pointer-events: none;
   opacity: 0.06;
   background-image: radial-gradient(rgba(255,255,255,0.42) 0.45px, transparent 0.45px);
   background-size: 6px 6px;
@@ -68,7 +129,6 @@ button {
 .bg-vignette {
   position: fixed;
   inset: 0;
-  pointer-events: none;
   z-index: 0;
   background: radial-gradient(circle at center, transparent 32%, rgba(0,0,0,0.58) 100%);
 }
@@ -76,7 +136,6 @@ button {
 .bg-pulse {
   position: fixed;
   inset: -20%;
-  pointer-events: none;
   z-index: 0;
   background:
     radial-gradient(circle at 20% 30%, rgba(255, 60, 60, 0.08), transparent 24%),
@@ -89,7 +148,6 @@ button {
   position: fixed;
   width: 130vw;
   height: 280px;
-  pointer-events: none;
   z-index: 0;
   filter: blur(40px);
   opacity: 0.12;
@@ -121,7 +179,6 @@ button {
   top: 0;
   bottom: 0;
   width: 200px;
-  pointer-events: none;
   z-index: 0;
   opacity: 0.34;
 }
@@ -157,40 +214,87 @@ button {
 .strings-right span:nth-child(4) { right: 116px; animation-delay: 3.4s; }
 .strings-right span:nth-child(5) { right: 148px; animation-delay: 4.4s; }
 
-.puppet-shadow {
+.watchers {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.18;
+}
+
+.eye {
+  position: absolute;
+  width: 120px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  box-shadow:
+    inset 0 0 18px rgba(255,255,255,0.03),
+    0 0 24px rgba(255, 60, 60, 0.06);
+  animation: blink 8s infinite ease-in-out, eyeFloat 12s infinite ease-in-out;
+}
+
+.eye i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, #ff8f8f 0 2px, #7e0f0f 3px 7px, transparent 8px);
+  box-shadow: 0 0 14px rgba(255, 80, 80, 0.26);
+  transition: transform 0.08s linear;
+}
+
+.eye-1 { top: 12%; left: 10%; animation-delay: 0s, 0.8s; }
+.eye-2 { top: 24%; right: 12%; width: 100px; animation-delay: 1.8s, 2s; }
+.eye-3 { bottom: 18%; left: 14%; width: 90px; animation-delay: 3.4s, 0.6s; }
+.eye-4 { bottom: 28%; right: 10%; width: 110px; animation-delay: 5s, 1.4s; }
+
+/* Cursor */
+.cursor-dot,
+.cursor-ring {
   position: fixed;
   top: 0;
-  width: 240px;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.05;
-  filter: blur(8px);
+  left: 0;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
 }
 
-.puppet-shadow-left {
-  left: -40px;
-  background:
-    radial-gradient(circle at 70% 15%, rgba(255,255,255,0.12), transparent 8%),
-    linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.1) 8%, transparent 20%),
-    linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.08) 12%, transparent 24%);
-  animation: shadowSwingLeft 12s ease-in-out infinite;
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 220, 220, 0.95);
+  box-shadow: 0 0 14px rgba(255, 80, 80, 0.55);
 }
 
-.puppet-shadow-right {
-  right: -40px;
-  background:
-    radial-gradient(circle at 30% 15%, rgba(255,255,255,0.12), transparent 8%),
-    linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.1) 8%, transparent 20%),
-    linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.08) 12%, transparent 24%);
-  animation: shadowSwingRight 11s ease-in-out infinite;
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 100, 100, 0.38);
+  box-shadow: 0 0 22px rgba(255, 80, 80, 0.14);
+  transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.cursor-ring.active {
+  width: 58px;
+  height: 58px;
+  border-color: rgba(255, 140, 140, 0.7);
+  box-shadow: 0 0 36px rgba(255, 80, 80, 0.26);
+}
+
+/* Structure */
 .site-header,
 .hero,
 .intro,
 .chart-section,
 .contract-section,
+.lore-section,
+.cta-section,
 .site-footer {
   position: relative;
   z-index: 1;
@@ -244,22 +348,30 @@ button {
 .brand-text {
   display: flex;
   flex-direction: column;
-  line-height: 1.02;
+  line-height: 1.04;
+}
+
+.brand-text strong,
+.intro h1,
+.section-head h2,
+.chart-placeholder-content h3,
+.lore-card h2,
+.cta-card h2 {
+  font-family: "Cinzel", serif;
 }
 
 .brand-text strong {
-  font-family: "UnifrakturCook", serif;
-  font-size: 1.35rem;
-  letter-spacing: 0.03em;
+  font-size: 1.06rem;
+  letter-spacing: 0.05em;
   font-weight: 700;
 }
 
 .brand-text span {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1rem;
+  font-size: 0.82rem;
   color: var(--red-soft);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  font-weight: 700;
 }
 
 .socials {
@@ -270,31 +382,37 @@ button {
   justify-content: flex-end;
 }
 
-.social-btn {
+.social-btn,
+.copy-btn,
+.cta-btn {
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(255, 88, 88, 0.24);
+  background: linear-gradient(180deg, rgba(24, 12, 12, 0.9), rgba(11, 7, 7, 0.9));
+  color: var(--text);
+  transition:
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    background 0.28s ease,
+    filter 0.28s ease;
+  will-change: transform;
+}
+
+.social-btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   min-height: 50px;
   padding: 10px 18px;
-  border: 1px solid rgba(255, 88, 88, 0.24);
-  background: linear-gradient(180deg, rgba(24, 12, 12, 0.9), rgba(11, 7, 7, 0.9));
   border-radius: 999px;
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.02),
-    0 0 0 rgba(0,0,0,0);
-  transition:
-    transform 0.28s ease,
-    border-color 0.28s ease,
-    box-shadow 0.28s ease,
-    background 0.28s ease;
-  will-change: transform;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
 }
 
 .social-btn::before,
 .copy-btn::before,
-.interactive-panel::before {
+.interactive-panel::before,
+.cta-btn::before {
   content: "";
   position: absolute;
   inset: -40%;
@@ -310,24 +428,27 @@ button {
 
 .social-btn:hover::before,
 .copy-btn:hover::before,
-.interactive-panel:hover::before {
+.interactive-panel:hover::before,
+.cta-btn:hover::before {
   transform: translateX(130%) rotate(8deg);
 }
 
-.social-btn:hover {
+.social-btn:hover,
+.copy-btn:hover,
+.cta-btn:hover {
   transform: translateY(-2px) scale(1.02);
-  border-color: rgba(255, 110, 110, 0.48);
+  border-color: rgba(255, 110, 110, 0.58);
   box-shadow:
-    0 0 22px rgba(224, 25, 25, 0.16),
+    0 0 24px rgba(224, 25, 25, 0.22),
+    0 0 60px rgba(255, 80, 80, 0.08),
     0 10px 24px rgba(0,0,0,0.26);
+  filter: brightness(1.04);
 }
 
-.social-btn:active {
+.social-btn:active,
+.copy-btn:active,
+.cta-btn:active {
   transform: translateY(0) scale(0.98);
-}
-
-.social-btn:hover .btn-strings {
-  opacity: 1;
 }
 
 .social-icon {
@@ -340,20 +461,21 @@ button {
   color: var(--text);
   font-weight: 800;
   flex-shrink: 0;
-  transition: transform 0.28s ease, background 0.28s ease;
+  transition: transform 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
 }
 
 .social-btn:hover .social-icon {
   transform: rotate(-10deg) scale(1.08);
   background: rgba(255, 80, 80, 0.24);
+  box-shadow: 0 0 16px rgba(255, 80, 80, 0.22);
 }
 
 .social-copy {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.15rem;
+  font-size: 1rem;
   color: var(--muted);
   white-space: nowrap;
   transition: color 0.28s ease, letter-spacing 0.28s ease;
+  font-weight: 700;
 }
 
 .social-btn:hover .social-copy {
@@ -364,9 +486,12 @@ button {
 .btn-strings {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+.social-btn:hover .btn-strings {
+  opacity: 1;
 }
 
 .btn-strings::before,
@@ -383,6 +508,7 @@ button {
 .btn-strings::before { left: 28%; }
 .btn-strings::after { right: 28%; animation-delay: 0.2s; }
 
+/* Panels */
 .hero {
   padding: 28px 0 12px;
 }
@@ -391,13 +517,14 @@ button {
   position: relative;
   overflow: hidden;
   border-radius: 24px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
 }
 
 .hero-wrap:hover {
   box-shadow:
     0 32px 85px rgba(0,0,0,0.48),
     0 0 60px rgba(224, 25, 25, 0.14);
+  filter: brightness(1.02);
 }
 
 .hero-banner {
@@ -421,7 +548,6 @@ button {
   top: 0;
   bottom: 0;
   width: 70px;
-  pointer-events: none;
   opacity: 0.28;
   transition: transform 0.45s ease, opacity 0.45s ease;
 }
@@ -446,13 +572,19 @@ button {
   opacity: 0.4;
 }
 
-.intro {
-  padding: 18px 0 10px;
+.intro,
+.chart-section,
+.contract-section,
+.lore-section,
+.cta-section {
+  padding-top: 18px;
 }
 
 .intro-card,
 .contract-card,
-.chart-frame {
+.chart-frame,
+.lore-card,
+.cta-card {
   position: relative;
   background: linear-gradient(180deg, rgba(18, 11, 11, 0.82), rgba(11, 8, 8, 0.94));
   border: 1px solid rgba(255, 88, 88, 0.12);
@@ -462,32 +594,37 @@ button {
   transition:
     transform 0.28s ease,
     border-color 0.28s ease,
-    box-shadow 0.28s ease;
+    box-shadow 0.28s ease,
+    filter 0.28s ease;
   will-change: transform;
 }
 
 .intro-card:hover,
 .contract-card:hover,
-.chart-frame:hover {
-  border-color: rgba(255, 110, 110, 0.26);
+.chart-frame:hover,
+.lore-card:hover,
+.cta-card:hover {
+  border-color: rgba(255, 110, 110, 0.3);
   box-shadow:
     0 22px 60px rgba(0, 0, 0, 0.52),
-    0 0 30px rgba(224, 25, 25, 0.1);
+    0 0 34px rgba(224, 25, 25, 0.14);
+  filter: brightness(1.02);
+}
+
+.intro-card::after,
+.contract-card::after,
+.chart-frame::after,
+.lore-card::after,
+.cta-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.04), transparent 46%);
 }
 
 .intro-card {
   padding: 30px;
   text-align: center;
-}
-
-.intro-card::after,
-.contract-card::after,
-.chart-frame::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.04), transparent 46%);
 }
 
 .eyebrow {
@@ -496,20 +633,15 @@ button {
   letter-spacing: 0.26em;
   font-size: 0.8rem;
   text-transform: uppercase;
-  font-family: "Cormorant Garamond", serif;
-}
-
-.intro h1,
-.section-head h2,
-.chart-placeholder-content h3 {
-  font-family: "UnifrakturCook", serif;
+  font-weight: 700;
 }
 
 .intro h1 {
   margin: 0;
   font-size: clamp(2rem, 5vw, 4rem);
   line-height: 1;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
+  font-weight: 700;
 }
 
 .lead {
@@ -518,7 +650,7 @@ button {
   color: var(--muted);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
 }
 
 .lead span {
@@ -535,10 +667,6 @@ button {
   line-height: 1.7;
 }
 
-.chart-section {
-  padding: 28px 0 12px;
-}
-
 .section-head {
   text-align: center;
   margin-bottom: 18px;
@@ -547,14 +675,15 @@ button {
 .section-head h2 {
   margin: 0;
   font-size: clamp(1.5rem, 3vw, 2.45rem);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
+  font-weight: 700;
 }
 
 .section-head p {
   margin: 8px 0 0;
   color: var(--muted);
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.15rem;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .chart-frame {
@@ -565,7 +694,6 @@ button {
   content: "";
   position: absolute;
   inset: 0;
-  pointer-events: none;
   background: linear-gradient(
     120deg,
     transparent 0%,
@@ -587,7 +715,6 @@ button {
 .chart-overlay {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   background:
     repeating-linear-gradient(
       180deg,
@@ -607,7 +734,6 @@ button {
 .chart-strings {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   opacity: 0.25;
 }
 
@@ -628,13 +754,14 @@ button {
   letter-spacing: 0.24em;
   font-size: 0.78rem;
   text-transform: uppercase;
-  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
 }
 
 .chart-placeholder-content h3 {
   margin: 0;
-  font-size: clamp(1.6rem, 4vw, 2.65rem);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
   line-height: 1.2;
+  font-weight: 700;
 }
 
 .placeholder-text {
@@ -642,12 +769,8 @@ button {
   margin: 12px auto 0;
   color: var(--muted);
   line-height: 1.7;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.15rem;
-}
-
-.contract-section {
-  padding: 22px 0 48px;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .contract-card {
@@ -661,7 +784,7 @@ button {
   letter-spacing: 0.22em;
   font-size: 0.8rem;
   color: var(--red-soft);
-  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
 }
 
 .contract-box {
@@ -688,34 +811,15 @@ button {
   white-space: nowrap;
   overflow: auto hidden;
   scrollbar-width: thin;
+  font-weight: 600;
 }
 
 .copy-btn {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 88, 88, 0.26);
-  background: linear-gradient(180deg, rgba(35, 14, 14, 0.96), rgba(15, 8, 8, 0.96));
-  color: var(--text);
   border-radius: 10px;
   padding: 11px 18px;
-  cursor: pointer;
-  transition:
-    transform 0.22s ease,
-    border-color 0.22s ease,
-    box-shadow 0.22s ease,
-    background 0.22s ease;
+  cursor: none;
   flex-shrink: 0;
-  will-change: transform;
-}
-
-.copy-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  border-color: rgba(255, 110, 110, 0.48);
-  box-shadow: 0 0 18px rgba(224, 25, 25, 0.14);
-}
-
-.copy-btn:active {
-  transform: translateY(0) scale(0.98);
+  font-weight: 700;
 }
 
 .copy-feedback {
@@ -723,11 +827,66 @@ button {
   margin: 12px 0 0;
   font-size: 0.92rem;
   color: var(--gold);
-  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
 }
 
+/* Lore */
+.lore-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.lore-card {
+  padding: 24px;
+}
+
+.lore-card h2 {
+  margin: 0 0 12px;
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+
+.lore-card p:last-child {
+  margin: 0;
+  color: #d7c8c5;
+  line-height: 1.7;
+}
+
+/* CTA */
+.cta-card {
+  padding: 30px;
+  text-align: center;
+}
+
+.cta-card h2 {
+  margin: 0 0 20px;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 700;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  min-height: 52px;
+  padding: 0 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: none;
+}
+
+/* Footer */
 .site-footer {
-  padding: 8px 0 32px;
+  padding: 20px 0 32px;
 }
 
 .site-footer p {
@@ -737,9 +896,10 @@ button {
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.74rem;
-  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
 }
 
+/* Reveal */
 .reveal {
   opacity: 0;
   transform: translateY(22px);
@@ -751,7 +911,19 @@ button {
   transform: translateY(0);
 }
 
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.4s; }
+.reveal-delay-6 { transition-delay: 0.48s; }
+
 /* Animations */
+@keyframes loadingLine {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(320%); }
+}
+
 @keyframes glowText {
   from { text-shadow: 0 0 6px rgba(255, 80, 80, 0.16); }
   to { text-shadow: 0 0 18px rgba(255, 80, 80, 0.34); }
@@ -821,14 +993,14 @@ button {
   50% { transform: translateY(4px); opacity: 0.6; }
 }
 
-@keyframes shadowSwingLeft {
-  0%, 100% { transform: translateX(0) rotate(0deg); opacity: 0.03; }
-  50% { transform: translateX(10px) rotate(1deg); opacity: 0.06; }
+@keyframes blink {
+  0%, 44%, 48%, 100% { transform: scaleY(1); }
+  46% { transform: scaleY(0.08); }
 }
 
-@keyframes shadowSwingRight {
-  0%, 100% { transform: translateX(0) rotate(0deg); opacity: 0.03; }
-  50% { transform: translateX(-10px) rotate(-1deg); opacity: 0.06; }
+@keyframes eyeFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(8px); }
 }
 
 /* Responsive */
@@ -850,6 +1022,22 @@ button {
   .chart-placeholder {
     min-height: 430px;
   }
+
+  .lore-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+
+  .cursor-dot,
+  .cursor-ring,
+  .watchers {
+    display: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -866,21 +1054,17 @@ button {
     opacity: 0.18;
   }
 
-  .puppet-shadow {
-    display: none;
-  }
-
   .brand-logo {
     width: 48px;
     height: 48px;
   }
 
   .brand-text strong {
-    font-size: 1.05rem;
+    font-size: 0.96rem;
   }
 
   .brand-text span {
-    font-size: 0.84rem;
+    font-size: 0.76rem;
   }
 
   .socials {
@@ -896,7 +1080,7 @@ button {
   }
 
   .social-copy {
-    font-size: 1rem;
+    font-size: 0.96rem;
   }
 
   .hero {
@@ -910,7 +1094,9 @@ button {
 
   .intro-card,
   .contract-card,
-  .chart-frame {
+  .chart-frame,
+  .lore-card,
+  .cta-card {
     padding: 18px;
     border-radius: 16px;
   }
@@ -936,8 +1122,10 @@ button {
     font-size: 0.9rem;
   }
 
-  .copy-btn {
+  .copy-btn,
+  .cta-btn {
     width: 100%;
+    cursor: pointer;
   }
 
   .site-footer p {
@@ -956,7 +1144,8 @@ button {
     font-size: 1rem;
   }
 
-  .chart-placeholder-content h3 {
+  .chart-placeholder-content h3,
+  .cta-card h2 {
     font-size: 1.4rem;
   }
 }
