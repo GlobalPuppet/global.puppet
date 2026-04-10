@@ -57,10 +57,11 @@ button {
   position: fixed;
   inset: 0;
   z-index: 99999;
-  background: radial-gradient(circle at center, rgba(50, 0, 0, 0.18), #020202 60%);
+  background: rgba(0, 0, 0, 0.97);
+  backdrop-filter: blur(18px);
   display: grid;
   place-items: center;
-  transition: opacity 0.7s ease, visibility 0.7s ease;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
 .loader.hide {
@@ -82,35 +83,66 @@ button {
 }
 
 .loader h1 {
-  margin: 0 0 18px;
+  margin: 18px 0 0;
   font-family: "Cinzel", serif;
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
   letter-spacing: 0.05em;
+  font-weight: 700;
 }
 
-.loader-line {
-  height: 2px;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.08);
-  overflow: hidden;
+.loader-puppet {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.loader-hand {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.loader-hand span {
+  width: 2px;
+  height: 70px;
+  background: linear-gradient(180deg, transparent, var(--red-soft), transparent);
+  box-shadow: 0 0 14px rgba(255, 82, 82, 0.22);
+  animation: pullString 1.2s infinite ease-in-out;
+}
+
+.loader-hand span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loader-hand span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.loader-bar {
+  width: 260px;
+  max-width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.08);
   border-radius: 999px;
+  overflow: hidden;
+  margin: 0 auto;
 }
 
-.loader-line span {
-  display: block;
-  width: 35%;
+.loader-progress {
   height: 100%;
+  width: 0%;
   background: linear-gradient(90deg, transparent, var(--red-soft), transparent);
-  animation: loadingLine 1.5s linear infinite;
+  animation: loadingProgress 3s linear forwards;
 }
 
 /* Background */
 .bg-noise,
 .bg-vignette,
 .bg-pulse,
+.bg-heartbeat,
 .fog,
 .strings,
 .watchers,
+.hidden-whisper,
 .cursor-dot,
 .cursor-ring {
   pointer-events: none;
@@ -142,6 +174,14 @@ button {
     radial-gradient(circle at 80% 20%, rgba(255, 180, 100, 0.05), transparent 20%),
     radial-gradient(circle at 50% 80%, rgba(255, 60, 60, 0.06), transparent 22%);
   animation: pulseField 10s ease-in-out infinite;
+}
+
+.bg-heartbeat {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(circle at center, rgba(255, 60, 60, 0.04), transparent 45%);
+  animation: heartbeat 5s ease-in-out infinite;
 }
 
 .fog {
@@ -214,11 +254,21 @@ button {
 .strings-right span:nth-child(4) { right: 116px; animation-delay: 3.4s; }
 .strings-right span:nth-child(5) { right: 148px; animation-delay: 4.4s; }
 
+body.string-pull .strings span,
+body.string-pull .chart-strings span {
+  animation-duration: 0.65s;
+}
+
 .watchers {
   position: fixed;
   inset: 0;
   z-index: 0;
-  opacity: 0.18;
+  opacity: 0.14;
+  transition: opacity 0.3s ease;
+}
+
+.watchers.eye-reveal {
+  opacity: 0.28;
 }
 
 .eye {
@@ -252,6 +302,19 @@ button {
 .eye-2 { top: 24%; right: 12%; width: 100px; animation-delay: 1.8s, 2s; }
 .eye-3 { bottom: 18%; left: 14%; width: 90px; animation-delay: 3.4s, 0.6s; }
 .eye-4 { bottom: 28%; right: 10%; width: 110px; animation-delay: 5s, 1.4s; }
+
+.hidden-whisper {
+  position: fixed;
+  right: 22px;
+  bottom: 18px;
+  z-index: 0;
+  color: rgba(255,255,255,0.08);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transform: rotate(-6deg);
+  user-select: none;
+}
 
 /* Cursor */
 .cursor-dot,
@@ -356,7 +419,8 @@ button {
 .section-head h2,
 .chart-placeholder-content h3,
 .lore-card h2,
-.cta-card h2 {
+.cta-card h2,
+.loader h1 {
   font-family: "Cinzel", serif;
 }
 
@@ -876,12 +940,26 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   min-width: 180px;
   min-height: 52px;
   padding: 0 22px;
   border-radius: 999px;
   font-weight: 700;
   cursor: none;
+}
+
+.cta-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(1.2);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.cta-btn:hover .cta-icon {
+  transform: scale(1.16) rotate(-5deg);
+  filter: brightness(1.35);
 }
 
 /* Footer */
@@ -918,10 +996,27 @@ button {
 .reveal-delay-5 { transition-delay: 0.4s; }
 .reveal-delay-6 { transition-delay: 0.48s; }
 
+/* Glitch */
+.glitch {
+  animation: textGlitch 0.12s linear 1;
+}
+
+@keyframes textGlitch {
+  0% { transform: translate(0); text-shadow: none; }
+  25% { transform: translate(-1px, 0); text-shadow: 1px 0 rgba(255,0,0,0.35); }
+  50% { transform: translate(1px, 0); text-shadow: -1px 0 rgba(255,255,255,0.18); }
+  100% { transform: translate(0); text-shadow: none; }
+}
+
 /* Animations */
-@keyframes loadingLine {
-  0% { transform: translateX(-120%); }
-  100% { transform: translateX(320%); }
+@keyframes loadingProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes pullString {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
 }
 
 @keyframes glowText {
@@ -967,6 +1062,12 @@ button {
 @keyframes pulseField {
   0%, 100% { transform: scale(1) translateY(0); opacity: 1; }
   50% { transform: scale(1.05) translateY(-8px); opacity: 0.88; }
+}
+
+@keyframes heartbeat {
+  0%, 100% { opacity: 0.16; transform: scale(1); }
+  40% { opacity: 0.28; transform: scale(1.03); }
+  60% { opacity: 0.14; transform: scale(1); }
 }
 
 @keyframes puppetPull {
@@ -1035,7 +1136,8 @@ button {
 
   .cursor-dot,
   .cursor-ring,
-  .watchers {
+  .watchers,
+  .hidden-whisper {
     display: none;
   }
 }
@@ -1133,6 +1235,10 @@ button {
     line-height: 1.6;
     padding: 0 10px;
   }
+
+  .loader-bar {
+    width: 220px;
+  }
 }
 
 @media (max-width: 420px) {
@@ -1145,7 +1251,8 @@ button {
   }
 
   .chart-placeholder-content h3,
-  .cta-card h2 {
+  .cta-card h2,
+  .loader h1 {
     font-size: 1.4rem;
   }
 }
