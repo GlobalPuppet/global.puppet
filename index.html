@@ -5,16 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Global Puppet ($STRNG)</title>
   <meta name="description" content="Global Puppet ($STRNG) — Not control. Not strategy. Just strings." />
+
+  <!-- Fancy fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="bg-noise"></div>
   <div class="bg-vignette"></div>
+  <div class="fog fog-1"></div>
+  <div class="fog fog-2"></div>
+
   <div class="strings strings-left" aria-hidden="true">
-    <span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
   </div>
   <div class="strings strings-right" aria-hidden="true">
-    <span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
   </div>
 
   <header class="site-header">
@@ -28,13 +40,13 @@
       </a>
 
       <nav class="socials" aria-label="Social links">
-        <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="X profile">
+        <a class="social-btn social-btn-x" href="#" target="_blank" rel="noopener noreferrer" aria-label="X profile">
           <span class="social-icon">X</span>
-          <span class="social-copy">@global.puppet.official</span>
+          <span class="social-copy">STRNGmain</span>
         </a>
 
         <a
-          class="social-btn"
+          class="social-btn social-btn-tiktok"
           href="https://www.tiktok.com/@gbnews/video/7615575228705524995"
           target="_blank"
           rel="noopener noreferrer"
@@ -48,13 +60,13 @@
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero reveal">
       <div class="container">
         <img src="banner.png" alt="Global Puppet banner" class="hero-banner" />
       </div>
     </section>
 
-    <section class="intro">
+    <section class="intro reveal reveal-delay-1">
       <div class="container intro-card">
         <p class="eyebrow">GLOBAL PUPPET</p>
         <h1>Not a market. A stage.</h1>
@@ -68,30 +80,32 @@
       </div>
     </section>
 
-    <section class="chart-section">
+    <section class="chart-section reveal reveal-delay-2">
       <div class="container">
         <div class="section-head">
           <h2>Live Chart</h2>
           <p>Watch the show in real time.</p>
         </div>
 
-        <div class="chart-frame">
-          <iframe
-            title="Dexscreener chart"
-            src="https://dexscreener.com"
-            loading="lazy"
-            allowfullscreen
-          ></iframe>
+        <div class="chart-frame chart-placeholder">
+          <div class="chart-overlay"></div>
+          <div class="chart-placeholder-content">
+            <p class="placeholder-small">DEXSCREENER EMBED</p>
+            <h3>Chart link goes here</h3>
+            <p class="placeholder-text">
+              Replace this section with your Dexscreener iframe when you’re ready.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="contract-section">
+    <section class="contract-section reveal reveal-delay-3">
       <div class="container">
         <div class="contract-card">
           <p class="contract-label">Official Contract Address</p>
           <div class="contract-box">
-            <code id="contractAddress"></code>
+            <code id="contractAddress">0x1234567890abcdef1234567890abcdef12345678</code>
             <button id="copyBtn" class="copy-btn" type="button">Copy</button>
           </div>
           <p id="copyFeedback" class="copy-feedback" aria-live="polite"></p>
@@ -100,7 +114,7 @@
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer reveal reveal-delay-4">
     <div class="container">
       <p>Power is a performance. We just see the strings.</p>
     </div>
@@ -123,6 +137,16 @@
         copyFeedback.textContent = "";
       }, 1800);
     });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
   </script>
 </body>
 </html>
