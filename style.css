@@ -353,6 +353,7 @@ body.string-pull .chart-strings span {
 /* Structure */
 .site-header,
 .hero,
+.buy-section,
 .intro,
 .chart-section,
 .contract-section,
@@ -420,6 +421,7 @@ body.string-pull .chart-strings span {
 .chart-placeholder-content h3,
 .lore-card h2,
 .cta-card h2,
+.buy-card h2,
 .loader h1 {
   font-family: "Cinzel", serif;
 }
@@ -448,7 +450,8 @@ body.string-pull .chart-strings span {
 
 .social-btn,
 .copy-btn,
-.cta-btn {
+.cta-btn,
+.buy-btn {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(255, 88, 88, 0.24);
@@ -476,7 +479,8 @@ body.string-pull .chart-strings span {
 .social-btn::before,
 .copy-btn::before,
 .interactive-panel::before,
-.cta-btn::before {
+.cta-btn::before,
+.buy-btn::before {
   content: "";
   position: absolute;
   inset: -40%;
@@ -493,13 +497,15 @@ body.string-pull .chart-strings span {
 .social-btn:hover::before,
 .copy-btn:hover::before,
 .interactive-panel:hover::before,
-.cta-btn:hover::before {
+.cta-btn:hover::before,
+.buy-btn:hover::before {
   transform: translateX(130%) rotate(8deg);
 }
 
 .social-btn:hover,
 .copy-btn:hover,
-.cta-btn:hover {
+.cta-btn:hover,
+.buy-btn:hover {
   transform: translateY(-2px) scale(1.02);
   border-color: rgba(255, 110, 110, 0.58);
   box-shadow:
@@ -511,7 +517,8 @@ body.string-pull .chart-strings span {
 
 .social-btn:active,
 .copy-btn:active,
-.cta-btn:active {
+.cta-btn:active,
+.buy-btn:active {
   transform: translateY(0) scale(0.98);
 }
 
@@ -526,6 +533,18 @@ body.string-pull .chart-strings span {
   font-weight: 800;
   flex-shrink: 0;
   transition: transform 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
+}
+
+.social-icon-svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
 }
 
 .social-btn:hover .social-icon {
@@ -636,6 +655,7 @@ body.string-pull .chart-strings span {
   opacity: 0.4;
 }
 
+.buy-section,
 .intro,
 .chart-section,
 .contract-section,
@@ -644,6 +664,7 @@ body.string-pull .chart-strings span {
   padding-top: 18px;
 }
 
+.buy-card,
 .intro-card,
 .contract-card,
 .chart-frame,
@@ -663,6 +684,7 @@ body.string-pull .chart-strings span {
   will-change: transform;
 }
 
+.buy-card:hover,
 .intro-card:hover,
 .contract-card:hover,
 .chart-frame:hover,
@@ -675,6 +697,7 @@ body.string-pull .chart-strings span {
   filter: brightness(1.02);
 }
 
+.buy-card::after,
 .intro-card::after,
 .contract-card::after,
 .chart-frame::after,
@@ -684,6 +707,45 @@ body.string-pull .chart-strings span {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.04), transparent 46%);
+}
+
+.buy-card {
+  padding: 34px 24px;
+  text-align: center;
+  border-color: rgba(255, 90, 90, 0.26);
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.52),
+    0 0 54px rgba(224, 25, 25, 0.16);
+}
+
+.buy-card h2 {
+  margin: 0 0 20px;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  letter-spacing: 0.03em;
+  font-weight: 800;
+}
+
+.buy-btn {
+  min-width: 240px;
+  min-height: 64px;
+  padding: 0 28px;
+  border-radius: 999px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: none;
+  background:
+    radial-gradient(circle at top, rgba(255, 95, 95, 0.16), transparent 50%),
+    linear-gradient(180deg, rgba(40, 14, 14, 0.98), rgba(16, 8, 8, 0.98));
+  box-shadow:
+    0 0 30px rgba(255, 70, 70, 0.18),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.buy-btn:hover {
+  box-shadow:
+    0 0 32px rgba(255, 70, 70, 0.26),
+    0 0 72px rgba(255, 70, 70, 0.12),
+    0 12px 28px rgba(0,0,0,0.28);
 }
 
 .intro-card {
@@ -949,15 +1011,22 @@ body.string-pull .chart-strings span {
   cursor: none;
 }
 
-.cta-icon {
+.cta-icon-wrap {
   width: 20px;
   height: 20px;
-  object-fit: contain;
-  filter: brightness(1.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-icon-svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.cta-btn:hover .cta-icon {
+.cta-btn:hover .cta-icon-svg {
   transform: scale(1.16) rotate(-5deg);
   filter: brightness(1.35);
 }
@@ -993,7 +1062,7 @@ body.string-pull .chart-strings span {
 .reveal-delay-2 { transition-delay: 0.16s; }
 .reveal-delay-3 { transition-delay: 0.24s; }
 .reveal-delay-4 { transition-delay: 0.32s; }
-.reveal-delay-5 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.40s; }
 .reveal-delay-6 { transition-delay: 0.48s; }
 
 /* Glitch */
@@ -1194,6 +1263,7 @@ body.string-pull .chart-strings span {
     border-radius: 18px;
   }
 
+  .buy-card,
   .intro-card,
   .contract-card,
   .chart-frame,
@@ -1201,6 +1271,17 @@ body.string-pull .chart-strings span {
   .cta-card {
     padding: 18px;
     border-radius: 16px;
+  }
+
+  .buy-btn,
+  .copy-btn,
+  .cta-btn {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .buy-btn {
+    min-width: 0;
   }
 
   .desc {
@@ -1222,12 +1303,6 @@ body.string-pull .chart-strings span {
 
   .contract-box code {
     font-size: 0.9rem;
-  }
-
-  .copy-btn,
-  .cta-btn {
-    width: 100%;
-    cursor: pointer;
   }
 
   .site-footer p {
@@ -1252,6 +1327,7 @@ body.string-pull .chart-strings span {
 
   .chart-placeholder-content h3,
   .cta-card h2,
+  .buy-card h2,
   .loader h1 {
     font-size: 1.4rem;
   }
