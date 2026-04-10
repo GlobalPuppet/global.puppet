@@ -6,11 +6,10 @@
   <title>Global Puppet ($STRNG)</title>
   <meta name="description" content="Global Puppet ($STRNG) — Not control. Not strategy. Just strings." />
 
-  <!-- Fancy fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=UnifrakturCook:wght@700&family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   />
 
@@ -19,19 +18,25 @@
 <body>
   <div class="bg-noise"></div>
   <div class="bg-vignette"></div>
+  <div class="bg-pulse"></div>
+
   <div class="fog fog-1"></div>
   <div class="fog fog-2"></div>
+  <div class="fog fog-3"></div>
 
   <div class="strings strings-left" aria-hidden="true">
-    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
   </div>
   <div class="strings strings-right" aria-hidden="true">
-    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
   </div>
+
+  <div class="puppet-shadow puppet-shadow-left" aria-hidden="true"></div>
+  <div class="puppet-shadow puppet-shadow-right" aria-hidden="true"></div>
 
   <header class="site-header">
     <div class="container header-inner">
-      <a href="#" class="brand" aria-label="Global Puppet home">
+      <a href="#" class="brand magnetic" aria-label="Global Puppet home">
         <img src="logo.png" alt="Global Puppet logo" class="brand-logo" />
         <div class="brand-text">
           <strong>Global Puppet</strong>
@@ -40,13 +45,20 @@
       </a>
 
       <nav class="socials" aria-label="Social links">
-        <a class="social-btn social-btn-x" href="#" target="_blank" rel="noopener noreferrer" aria-label="X profile">
+        <a
+          class="social-btn social-btn-x magnetic"
+          href="https://x.com/STRNGmain"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="X profile"
+        >
           <span class="social-icon">X</span>
           <span class="social-copy">STRNGmain</span>
+          <span class="btn-strings" aria-hidden="true"></span>
         </a>
 
         <a
-          class="social-btn social-btn-tiktok"
+          class="social-btn social-btn-tiktok magnetic"
           href="https://www.tiktok.com/@gbnews/video/7615575228705524995"
           target="_blank"
           rel="noopener noreferrer"
@@ -54,6 +66,7 @@
         >
           <span class="social-icon">♪</span>
           <span class="social-copy">PROPAGANDA?</span>
+          <span class="btn-strings" aria-hidden="true"></span>
         </a>
       </nav>
     </div>
@@ -62,21 +75,27 @@
   <main>
     <section class="hero reveal">
       <div class="container">
-        <img src="banner.png" alt="Global Puppet banner" class="hero-banner" />
+        <div class="hero-wrap interactive-panel magnetic">
+          <img src="banner.png" alt="Global Puppet banner" class="hero-banner" />
+          <div class="hero-curtain left"></div>
+          <div class="hero-curtain right"></div>
+        </div>
       </div>
     </section>
 
     <section class="intro reveal reveal-delay-1">
-      <div class="container intro-card">
-        <p class="eyebrow">GLOBAL PUPPET</p>
-        <h1>Not a market. A stage.</h1>
-        <p class="lead">
-          Not decisions.
-          <span>Just strings.</span>
-        </p>
-        <p class="desc">
-          Global Puppet ($STRNG) is what happens when the world’s loudest leader looks less like a mastermind… and more like a character being played.
-        </p>
+      <div class="container">
+        <div class="intro-card interactive-panel magnetic">
+          <p class="eyebrow">GLOBAL PUPPET</p>
+          <h1>Not a market. A stage.</h1>
+          <p class="lead">
+            Not decisions.
+            <span>Just strings.</span>
+          </p>
+          <p class="desc">
+            Global Puppet ($STRNG) is what happens when the world’s loudest leader looks less like a mastermind… and more like a character being played.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -87,12 +106,16 @@
           <p>Watch the show in real time.</p>
         </div>
 
-        <div class="chart-frame chart-placeholder">
+        <div class="chart-frame chart-placeholder interactive-panel magnetic">
           <div class="chart-overlay"></div>
+          <div class="chart-strings" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
           <div class="chart-placeholder-content">
             <p class="placeholder-small">DEXSCREENER EMBED</p>
-            <h3>Chart link goes here</h3>
+            <h3>CHART LINK WILL BE AVAILABLE SOON</h3>
             <p class="placeholder-text">
+              The live embed will be added after launch.
             </p>
           </div>
         </div>
@@ -101,11 +124,11 @@
 
     <section class="contract-section reveal reveal-delay-3">
       <div class="container">
-        <div class="contract-card">
+        <div class="contract-card interactive-panel magnetic">
           <p class="contract-label">Official Contract Address</p>
           <div class="contract-box">
-            <code id="contractAddress"></code>
-            <button id="copyBtn" class="copy-btn" type="button">Copy</button>
+            <code id="contractAddress">CA WILL BE AVAILABLE SOON</code>
+            <button id="copyBtn" class="copy-btn magnetic" type="button">Copy</button>
           </div>
           <p id="copyFeedback" class="copy-feedback" aria-live="polite"></p>
         </div>
@@ -125,8 +148,16 @@
     const copyFeedback = document.getElementById("copyFeedback");
 
     copyBtn.addEventListener("click", async () => {
+      const text = contractAddress.textContent.trim();
+
+      if (text === "CA WILL BE AVAILABLE SOON") {
+        copyFeedback.textContent = "Contract address not added yet.";
+        setTimeout(() => copyFeedback.textContent = "", 1800);
+        return;
+      }
+
       try {
-        await navigator.clipboard.writeText(contractAddress.textContent.trim());
+        await navigator.clipboard.writeText(text);
         copyFeedback.textContent = "Contract copied.";
       } catch (e) {
         copyFeedback.textContent = "Copy failed. Copy it manually.";
@@ -146,6 +177,25 @@
     }, { threshold: 0.14 });
 
     document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+    const magneticItems = document.querySelectorAll(".magnetic");
+
+    magneticItems.forEach((item) => {
+      item.addEventListener("mousemove", (e) => {
+        const rect = item.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const moveX = (x - rect.width / 2) / rect.width * 10;
+        const moveY = (y - rect.height / 2) / rect.height * 10;
+
+        item.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      });
+
+      item.addEventListener("mouseleave", () => {
+        item.style.transform = "";
+      });
+    });
   </script>
 </body>
 </html>
