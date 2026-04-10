@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Global Puppet ($STRNG)</title>
+  <meta name="description" content="Global Puppet ($STRNG) — Not control. Not strategy. Just strings." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-noise"></div>
+  <div class="bg-vignette"></div>
+  <div class="strings strings-left" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="strings strings-right" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand" aria-label="Global Puppet home">
+        <img src="logo.png" alt="Global Puppet logo" class="brand-logo" />
+        <div class="brand-text">
+          <strong>Global Puppet</strong>
+          <span>$STRNG</span>
+        </div>
+      </a>
+
+      <nav class="socials" aria-label="Social links">
+        <a class="social-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="X profile">
+          <span class="social-icon">X</span>
+          <span class="social-copy">@global.puppet.official</span>
+        </a>
+
+        <a
+          class="social-btn"
+          href="https://www.tiktok.com/@gbnews/video/7615575228705524995"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="TikTok link"
+        >
+          <span class="social-icon">♪</span>
+          <span class="social-copy">PROPAGANDA?</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <img src="banner.png" alt="Global Puppet banner" class="hero-banner" />
+      </div>
+    </section>
+
+    <section class="intro">
+      <div class="container intro-card">
+        <p class="eyebrow">GLOBAL PUPPET</p>
+        <h1>Not a market. A stage.</h1>
+        <p class="lead">
+          Not decisions.
+          <span>Just strings.</span>
+        </p>
+        <p class="desc">
+          Global Puppet ($STRNG) is what happens when the world’s loudest leader looks less like a mastermind… and more like a character being played.
+        </p>
+      </div>
+    </section>
+
+    <section class="chart-section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Live Chart</h2>
+          <p>Watch the show in real time.</p>
+        </div>
+
+        <div class="chart-frame">
+          <iframe
+            title="Dexscreener chart"
+            src="https://dexscreener.com"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="contract-section">
+      <div class="container">
+        <div class="contract-card">
+          <p class="contract-label">Official Contract Address</p>
+          <div class="contract-box">
+            <code id="contractAddress"></code>
+            <button id="copyBtn" class="copy-btn" type="button">Copy</button>
+          </div>
+          <p id="copyFeedback" class="copy-feedback" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Power is a performance. We just see the strings.</p>
+    </div>
+  </footer>
+
+  <script>
+    const copyBtn = document.getElementById("copyBtn");
+    const contractAddress = document.getElementById("contractAddress");
+    const copyFeedback = document.getElementById("copyFeedback");
+
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(contractAddress.textContent.trim());
+        copyFeedback.textContent = "Contract copied.";
+      } catch (e) {
+        copyFeedback.textContent = "Copy failed. Copy it manually.";
+      }
+
+      setTimeout(() => {
+        copyFeedback.textContent = "";
+      }, 1800);
+    });
+  </script>
+</body>
+</html>
