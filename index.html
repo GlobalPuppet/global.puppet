@@ -19,14 +19,27 @@
   <div id="loader" class="loader">
     <div class="loader-inner">
       <p class="loader-top">GLOBAL PUPPET</p>
+
+      <div class="loader-puppet" aria-hidden="true">
+        <div class="loader-hand">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+
       <h1>PULLING THE STRINGS...</h1>
-      <div class="loader-line"><span></span></div>
     </div>
   </div>
 
   <div class="bg-noise"></div>
   <div class="bg-vignette"></div>
   <div class="bg-pulse parallax" data-speed="0.08"></div>
+  <div class="bg-heartbeat"></div>
 
   <div class="fog fog-1 parallax" data-speed="0.05"></div>
   <div class="fog fog-2 parallax" data-speed="0.08"></div>
@@ -46,6 +59,8 @@
     <span class="eye eye-4"><i></i></span>
   </div>
 
+  <div class="hidden-whisper" aria-hidden="true">You are already watching.</div>
+
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
@@ -61,7 +76,7 @@
 
       <nav class="socials" aria-label="Social links">
         <a
-          class="social-btn magnetic cursor-hover"
+          class="social-btn magnetic cursor-hover string-react"
           href="https://x.com/STRNGmain"
           target="_blank"
           rel="noopener noreferrer"
@@ -73,7 +88,7 @@
         </a>
 
         <a
-          class="social-btn magnetic cursor-hover"
+          class="social-btn magnetic cursor-hover string-react"
           href="https://www.tiktok.com/@gbnews/video/7615575228705524995"
           target="_blank"
           rel="noopener noreferrer"
@@ -90,7 +105,7 @@
   <main>
     <section class="hero reveal">
       <div class="container">
-        <div class="hero-wrap interactive-panel magnetic cursor-hover">
+        <div class="hero-wrap interactive-panel magnetic cursor-hover string-react">
           <img src="banner.png" alt="Global Puppet banner" class="hero-banner" />
           <div class="hero-curtain left"></div>
           <div class="hero-curtain right"></div>
@@ -100,9 +115,9 @@
 
     <section class="intro reveal reveal-delay-1">
       <div class="container">
-        <div class="intro-card interactive-panel magnetic cursor-hover">
+        <div class="intro-card interactive-panel magnetic cursor-hover string-react">
           <p class="eyebrow">GLOBAL PUPPET</p>
-          <h1>Not a market. A stage.</h1>
+          <h1 class="glitch-target">Not a market. A stage.</h1>
           <p class="lead">Not decisions. <span>Just strings.</span></p>
           <p class="desc">
             Global Puppet ($STRNG) is what happens when the world’s loudest leader
@@ -115,18 +130,18 @@
     <section class="chart-section reveal reveal-delay-2">
       <div class="container">
         <div class="section-head">
-          <h2>Live Chart</h2>
+          <h2 class="glitch-target">Live Chart</h2>
           <p>Watch the show in real time.</p>
         </div>
 
-        <div class="chart-frame chart-placeholder interactive-panel magnetic cursor-hover">
+        <div class="chart-frame chart-placeholder interactive-panel magnetic cursor-hover string-react">
           <div class="chart-overlay"></div>
           <div class="chart-strings" aria-hidden="true">
             <span></span><span></span><span></span>
           </div>
           <div class="chart-placeholder-content">
             <p class="placeholder-small">DEXSCREENER EMBED</p>
-            <h3>CHART LINK WILL BE AVAILABLE SOON</h3>
+            <h3 class="glitch-target">CHART LINK WILL BE AVAILABLE SOON</h3>
             <p class="placeholder-text">
               The live embed will be added after launch.
             </p>
@@ -137,7 +152,7 @@
 
     <section class="contract-section reveal reveal-delay-3">
       <div class="container">
-        <div class="contract-card interactive-panel magnetic cursor-hover">
+        <div class="contract-card interactive-panel magnetic cursor-hover string-react">
           <p class="contract-label">Official Contract Address</p>
           <div class="contract-box">
             <code id="contractAddress">CA WILL BE AVAILABLE SOON</code>
@@ -153,7 +168,7 @@
     <section class="lore-section reveal reveal-delay-4">
       <div class="container">
         <div class="lore-grid">
-          <div class="lore-card interactive-panel magnetic cursor-hover">
+          <div class="lore-card interactive-panel magnetic cursor-hover string-react">
             <p class="eyebrow">THE SHOW</p>
             <h2>Everything moves for a reason.</h2>
             <p>
@@ -162,7 +177,7 @@
             </p>
           </div>
 
-          <div class="lore-card interactive-panel magnetic cursor-hover">
+          <div class="lore-card interactive-panel magnetic cursor-hover string-react">
             <p class="eyebrow">THE SCRIPT</p>
             <h2>Chaos is just controlled noise.</h2>
             <p>
@@ -171,7 +186,7 @@
             </p>
           </div>
 
-          <div class="lore-card interactive-panel magnetic cursor-hover">
+          <div class="lore-card interactive-panel magnetic cursor-hover string-react">
             <p class="eyebrow">THE AUDIENCE</p>
             <h2>Backstage Puppets see more.</h2>
             <p>
@@ -185,25 +200,30 @@
 
     <section class="cta-section reveal reveal-delay-5">
       <div class="container">
-        <div class="cta-card interactive-panel magnetic cursor-hover">
+        <div class="cta-card interactive-panel magnetic cursor-hover string-react">
           <p class="eyebrow">FOLLOW THE STRINGS</p>
-          <h2>Enter the stage. Watch the show.</h2>
+          <h2 class="glitch-target">Enter the stage. Watch the show.</h2>
           <div class="cta-buttons">
             <a
-              class="cta-btn cursor-hover"
+              class="cta-btn cursor-hover string-react"
               href="https://x.com/STRNGmain"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Enter X"
             >
-              Enter X
+              <span>Enter</span>
+              <img src="x-logo.png" alt="X logo" class="cta-icon" />
             </a>
+
             <a
-              class="cta-btn cursor-hover"
+              class="cta-btn cursor-hover string-react"
               href="https://www.tiktok.com/@gbnews/video/7615575228705524995"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Enter TikTok"
             >
-              Enter TikTok
+              <span>Enter</span>
+              <img src="tiktok-logo.png" alt="TikTok logo" class="cta-icon" />
             </a>
           </div>
         </div>
@@ -222,7 +242,7 @@
     window.addEventListener("load", () => {
       setTimeout(() => {
         loader.classList.add("hide");
-      }, 1200);
+      }, 3000);
     });
 
     const copyBtn = document.getElementById("copyBtn");
@@ -240,7 +260,7 @@
 
       try {
         await navigator.clipboard.writeText(text);
-        copyFeedback.textContent = "Contract copied.";
+        copyFeedback.textContent = "String secured.";
       } catch (e) {
         copyFeedback.textContent = "Copy failed. Copy it manually.";
       }
@@ -312,8 +332,11 @@
     });
 
     const eyes = document.querySelectorAll(".eye i");
+    const eyeWrap = document.querySelector(".watchers");
+
     window.addEventListener("mousemove", (e) => {
       if (window.innerWidth < 768) return;
+
       eyes.forEach((pupil) => {
         const eye = pupil.parentElement.getBoundingClientRect();
         const eyeCenterX = eye.left + eye.width / 2;
@@ -324,6 +347,29 @@
         const y = Math.sin(angle) * distance;
         pupil.style.transform = `translate(${x}px, ${y}px)`;
       });
+    });
+
+    document.querySelectorAll(".string-react").forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        document.body.classList.add("string-pull");
+        if (eyeWrap) eyeWrap.classList.add("eye-reveal");
+      });
+
+      el.addEventListener("mouseleave", () => {
+        document.body.classList.remove("string-pull");
+        if (eyeWrap) eyeWrap.classList.remove("eye-reveal");
+      });
+    });
+
+    let glitchTick = 0;
+    window.addEventListener("scroll", () => {
+      glitchTick++;
+      if (glitchTick % 18 === 0) {
+        document.querySelectorAll(".glitch-target").forEach((el) => {
+          el.classList.add("glitch");
+          setTimeout(() => el.classList.remove("glitch"), 120);
+        });
+      }
     });
   </script>
 </body>
