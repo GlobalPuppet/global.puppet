@@ -9,30 +9,45 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=UnifrakturCook:wght@700&family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="loader" class="loader">
+    <div class="loader-inner">
+      <p class="loader-top">GLOBAL PUPPET</p>
+      <h1>PULLING THE STRINGS...</h1>
+      <div class="loader-line"><span></span></div>
+    </div>
+  </div>
+
   <div class="bg-noise"></div>
   <div class="bg-vignette"></div>
-  <div class="bg-pulse"></div>
+  <div class="bg-pulse parallax" data-speed="0.08"></div>
 
-  <div class="fog fog-1"></div>
-  <div class="fog fog-2"></div>
-  <div class="fog fog-3"></div>
+  <div class="fog fog-1 parallax" data-speed="0.05"></div>
+  <div class="fog fog-2 parallax" data-speed="0.08"></div>
+  <div class="fog fog-3 parallax" data-speed="0.03"></div>
 
-  <div class="strings strings-left" aria-hidden="true">
+  <div class="strings strings-left parallax" data-speed="0.12" aria-hidden="true">
     <span></span><span></span><span></span><span></span><span></span>
   </div>
-  <div class="strings strings-right" aria-hidden="true">
+  <div class="strings strings-right parallax" data-speed="0.1" aria-hidden="true">
     <span></span><span></span><span></span><span></span><span></span>
   </div>
 
-  <div class="puppet-shadow puppet-shadow-left" aria-hidden="true"></div>
-  <div class="puppet-shadow puppet-shadow-right" aria-hidden="true"></div>
+  <div class="watchers parallax" data-speed="0.04" aria-hidden="true">
+    <span class="eye eye-1"><i></i></span>
+    <span class="eye eye-2"><i></i></span>
+    <span class="eye eye-3"><i></i></span>
+    <span class="eye eye-4"><i></i></span>
+  </div>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
   <header class="site-header">
     <div class="container header-inner">
@@ -46,7 +61,7 @@
 
       <nav class="socials" aria-label="Social links">
         <a
-          class="social-btn social-btn-x magnetic"
+          class="social-btn magnetic cursor-hover"
           href="https://x.com/STRNGmain"
           target="_blank"
           rel="noopener noreferrer"
@@ -58,7 +73,7 @@
         </a>
 
         <a
-          class="social-btn social-btn-tiktok magnetic"
+          class="social-btn magnetic cursor-hover"
           href="https://www.tiktok.com/@gbnews/video/7615575228705524995"
           target="_blank"
           rel="noopener noreferrer"
@@ -75,7 +90,7 @@
   <main>
     <section class="hero reveal">
       <div class="container">
-        <div class="hero-wrap interactive-panel magnetic">
+        <div class="hero-wrap interactive-panel magnetic cursor-hover">
           <img src="banner.png" alt="Global Puppet banner" class="hero-banner" />
           <div class="hero-curtain left"></div>
           <div class="hero-curtain right"></div>
@@ -85,15 +100,13 @@
 
     <section class="intro reveal reveal-delay-1">
       <div class="container">
-        <div class="intro-card interactive-panel magnetic">
+        <div class="intro-card interactive-panel magnetic cursor-hover">
           <p class="eyebrow">GLOBAL PUPPET</p>
           <h1>Not a market. A stage.</h1>
-          <p class="lead">
-            Not decisions.
-            <span>Just strings.</span>
-          </p>
+          <p class="lead">Not decisions. <span>Just strings.</span></p>
           <p class="desc">
-            Global Puppet ($STRNG) is what happens when the world’s loudest leader looks less like a mastermind… and more like a character being played.
+            Global Puppet ($STRNG) is what happens when the world’s loudest leader
+            looks less like a mastermind… and more like a character being played.
           </p>
         </div>
       </div>
@@ -106,7 +119,7 @@
           <p>Watch the show in real time.</p>
         </div>
 
-        <div class="chart-frame chart-placeholder interactive-panel magnetic">
+        <div class="chart-frame chart-placeholder interactive-panel magnetic cursor-hover">
           <div class="chart-overlay"></div>
           <div class="chart-strings" aria-hidden="true">
             <span></span><span></span><span></span>
@@ -124,25 +137,94 @@
 
     <section class="contract-section reveal reveal-delay-3">
       <div class="container">
-        <div class="contract-card interactive-panel magnetic">
+        <div class="contract-card interactive-panel magnetic cursor-hover">
           <p class="contract-label">Official Contract Address</p>
           <div class="contract-box">
             <code id="contractAddress">CA WILL BE AVAILABLE SOON</code>
-            <button id="copyBtn" class="copy-btn magnetic" type="button">Copy</button>
+            <button id="copyBtn" class="copy-btn magnetic cursor-hover" type="button">
+              Copy
+            </button>
           </div>
           <p id="copyFeedback" class="copy-feedback" aria-live="polite"></p>
         </div>
       </div>
     </section>
+
+    <section class="lore-section reveal reveal-delay-4">
+      <div class="container">
+        <div class="lore-grid">
+          <div class="lore-card interactive-panel magnetic cursor-hover">
+            <p class="eyebrow">THE SHOW</p>
+            <h2>Everything moves for a reason.</h2>
+            <p>
+              News breaks. Markets react. People panic. But the timing always feels
+              just a little too perfect. That is where $STRNG lives.
+            </p>
+          </div>
+
+          <div class="lore-card interactive-panel magnetic cursor-hover">
+            <p class="eyebrow">THE SCRIPT</p>
+            <h2>Chaos is just controlled noise.</h2>
+            <p>
+              Global Puppet does not explain the stage. It points at it. Loud moves,
+              polished narratives, carefully timed reactions — all part of the act.
+            </p>
+          </div>
+
+          <div class="lore-card interactive-panel magnetic cursor-hover">
+            <p class="eyebrow">THE AUDIENCE</p>
+            <h2>Backstage Puppets see more.</h2>
+            <p>
+              The audience reacts. The actors perform. Backstage Puppets know the
+              show never runs by accident.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section reveal reveal-delay-5">
+      <div class="container">
+        <div class="cta-card interactive-panel magnetic cursor-hover">
+          <p class="eyebrow">FOLLOW THE STRINGS</p>
+          <h2>Enter the stage. Watch the show.</h2>
+          <div class="cta-buttons">
+            <a
+              class="cta-btn cursor-hover"
+              href="https://x.com/STRNGmain"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Enter X
+            </a>
+            <a
+              class="cta-btn cursor-hover"
+              href="https://www.tiktok.com/@gbnews/video/7615575228705524995"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Enter TikTok
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer reveal reveal-delay-4">
+  <footer class="site-footer reveal reveal-delay-6">
     <div class="container">
       <p>Power is a performance. We just see the strings.</p>
     </div>
   </footer>
 
   <script>
+    const loader = document.getElementById("loader");
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        loader.classList.add("hide");
+      }, 1200);
+    });
+
     const copyBtn = document.getElementById("copyBtn");
     const contractAddress = document.getElementById("contractAddress");
     const copyFeedback = document.getElementById("copyFeedback");
@@ -170,30 +252,77 @@
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("revealed");
-        }
+        if (entry.isIntersecting) entry.target.classList.add("revealed");
       });
-    }, { threshold: 0.14 });
+    }, { threshold: 0.12 });
 
     document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
     const magneticItems = document.querySelectorAll(".magnetic");
-
     magneticItems.forEach((item) => {
       item.addEventListener("mousemove", (e) => {
+        if (window.innerWidth < 900) return;
         const rect = item.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-
-        const moveX = (x - rect.width / 2) / rect.width * 10;
-        const moveY = (y - rect.height / 2) / rect.height * 10;
-
+        const moveX = (x - rect.width / 2) / rect.width * 8;
+        const moveY = (y - rect.height / 2) / rect.height * 8;
         item.style.transform = `translate(${moveX}px, ${moveY}px)`;
       });
 
       item.addEventListener("mouseleave", () => {
         item.style.transform = "";
+      });
+    });
+
+    const cursorDot = document.getElementById("cursorDot");
+    const cursorRing = document.getElementById("cursorRing");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    window.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    });
+
+    function animateCursor() {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+      cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    document.querySelectorAll(".cursor-hover, a, button").forEach((el) => {
+      el.addEventListener("mouseenter", () => cursorRing.classList.add("active"));
+      el.addEventListener("mouseleave", () => cursorRing.classList.remove("active"));
+    });
+
+    const parallaxItems = document.querySelectorAll(".parallax");
+    window.addEventListener("scroll", () => {
+      const top = window.pageYOffset;
+      parallaxItems.forEach((item) => {
+        const speed = parseFloat(item.dataset.speed || 0);
+        item.style.transform = `translateY(${top * speed}px)`;
+      });
+    });
+
+    const eyes = document.querySelectorAll(".eye i");
+    window.addEventListener("mousemove", (e) => {
+      if (window.innerWidth < 768) return;
+      eyes.forEach((pupil) => {
+        const eye = pupil.parentElement.getBoundingClientRect();
+        const eyeCenterX = eye.left + eye.width / 2;
+        const eyeCenterY = eye.top + eye.height / 2;
+        const angle = Math.atan2(e.clientY - eyeCenterY, e.clientX - eyeCenterX);
+        const distance = 5;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        pupil.style.transform = `translate(${x}px, ${y}px)`;
       });
     });
   </script>
